@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Sistema de gerenciamento de produtos.">
+  <title>Product Manager | Cadastro de produtos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-content">
+      <a class="brand" href="#" aria-label="Product Manager - início">
+        <span class="brand-mark">P</span>
+        <span>Product<span class="brand-light">Manager</span></span>
+      </a>
+      <span class="topbar-tag">GERENCIAMENTO DE PRODUTOS</span>
+    </div>
+  </header>
+
+  <main class="page-container">
+    <section class="page-heading">
+      <div>
+        <p class="eyebrow">PAINEL DE CONTROLE</p>
+        <h1>Produtos</h1>
+        <p class="page-subtitle">Cadastre, consulte e gerencie os produtos da sua aplicação.</p>
+      </div>
+      <div class="heading-icon" aria-hidden="true">▦</div>
+    </section>
+
+    <section class="content-grid">
+      <aside class="sidebar">
+        <section class="panel form-panel">
+          <div class="panel-heading">
+            <div class="panel-icon add-icon">＋</div>
+            <div>
+              <h2>Novo produto</h2>
+              <p>Preencha os dados para cadastrar.</p>
+            </div>
+          </div>
+
+          <form id="add-product-form">
+            <div class="field">
+              <label for="name">Nome do produto</label>
+              <input type="text" id="name" name="name" placeholder="Ex.: Teclado mecânico" required>
+            </div>
+            <div class="field">
+              <label for="description">Descrição</label>
+              <textarea id="description" name="description" rows="3" placeholder="Descreva as características do produto"></textarea>
+            </div>
+            <div class="field">
+              <label for="price">Preço (R$)</label>
+              <div class="input-prefix">
+                <span>R$</span>
+                <input type="number" id="price" name="price" placeholder="0,00" required min="0" step="0.01">
+              </div>
+            </div>
+            <button class="button button-primary button-full" type="submit">Cadastrar produto <span>→</span></button>
+          </form>
+        </section>
+
+        <section class="panel search-panel">
+          <div class="panel-heading compact-heading">
+            <div class="panel-icon search-icon">⌕</div>
+            <div>
+              <h2>Consultar por ID</h2>
+              <p>Encontre um produto específico.</p>
+            </div>
+          </div>
+          <form id="search-product-form" class="search-form">
+            <div class="field">
+              <label for="search-id">ID do produto</label>
+              <input type="number" id="search-id" name="id" min="1" step="1" placeholder="Digite o ID" required>
+            </div>
+            <button class="button button-secondary button-full" type="submit">Consultar produto</button>
+          </form>
+          <div id="search-result" class="search-result" aria-live="polite"></div>
+        </section>
+      </aside>
+
+      <section class="panel products-panel">
+        <div class="products-heading">
+          <div>
+            <p class="eyebrow">SEU CATÁLOGO</p>
+            <h2>Produtos cadastrados</h2>
+            <p class="section-description">Visualize e gerencie os registros disponíveis.</p>
+          </div>
+          <button id="refresh-products" class="button button-refresh" type="button" title="Atualizar lista">
+            <span aria-hidden="true">↻</span> Atualizar
+          </button>
+        </div>
+
+        <div class="list-summary">
+          <span class="summary-dot"></span>
+          <span id="product-count">Carregando produtos...</span>
+        </div>
+
+        <div id="products" class="product-list" aria-live="polite">
+          <div class="loading-state">Carregando produtos...</div>
+        </div>
+      </section>
+    </section>
+
+    <section id="update-panel" class="panel update-panel" hidden>
+      <div class="panel-heading">
+        <div class="panel-icon edit-icon">✎</div>
+        <div>
+          <h2>Atualizar produto</h2>
+          <p>Altere os campos desejados e salve as modificações.</p>
+        </div>
+      </div>
+      <form id="update-product-form" class="update-form">
+        <input type="hidden" id="update-id" name="id">
+        <div class="field">
+          <label for="update-name">Nome do produto</label>
+          <input type="text" id="update-name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="update-description">Descrição</label>
+          <textarea id="update-description" name="description" rows="3" placeholder="Descrição do produto"></textarea>
+        </div>
+        <div class="field">
+          <label for="update-price">Preço (R$)</label>
+          <div class="input-prefix">
+            <span>R$</span>
+            <input type="number" id="update-price" name="price" required min="0" step="0.01">
+          </div>
+        </div>
+        <div class="form-actions">
+          <button class="button button-primary" type="submit">Salvar alterações</button>
+          <button id="cancel-update" class="button button-ghost" type="button">Cancelar</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="app-message" class="app-message" role="status" aria-live="polite"></div>
+  </main>
+
+  <footer class="footer">
+    <span>Product Manager</span>
+    <span>Aplicação de gerenciamento de produtos</span>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
